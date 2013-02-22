@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{EE7E824C-6B65-48B4-BEB3-901CAD87C75D}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>VectorAsteroids</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Data\User\Documents\Visual Studio 2012\allegro\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Data\User\Documents\Visual Studio 2012\allegro\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>allegro-5.0.8-md-debug.lib;allegro_ttf-5.0.8-md-debug.lib;allegro_primitives-5.0.8-md-debug.lib;allegro_font-5.0.8-md-debug.lib;allegro_acodec-5.0.8-md-debug.lib;allegro_audio-5.0.8-md-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Data\User\Documents\Visual Studio 2012\allegro\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>C:\Data\User\Documents\Visual Studio 2012\allegro\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>allegro-5.0.8-md.lib;allegro_ttf-5.0.8-md.lib;allegro_primitives-5.0.8-md.lib;allegro_font-5.0.8-md.lib;allegro_acodec-5.0.8-md.lib;allegro_audio-5.0.8-md.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Controllers.h" />
+    <ClInclude Include="Dot.h" />
+    <ClInclude Include="entity.h" />
+    <ClInclude Include="HUD.h" />
+    <ClInclude Include="LargeRock.h" />
+    <ClInclude Include="LargeUFO.h" />
+    <ClInclude Include="MediumRock.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerCheck.h" />
+    <ClInclude Include="PlayerShot.h" />
+    <ClInclude Include="Rock.h" />
+    <ClInclude Include="RockController.h" />
+    <ClInclude Include="Explosion.h" />
+    <ClInclude Include="Shot.h" />
+    <ClInclude Include="SmallRock.h" />
+    <ClInclude Include="SmallUFO.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="UFO.h" />
+    <ClInclude Include="UFOController.h" />
+    <ClInclude Include="UFOShot.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Controllers.cpp" />
+    <ClCompile Include="Dot.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="HUD.cpp" />
+    <ClCompile Include="LargeRock.cpp" />
+    <ClCompile Include="LargeUFO.cpp" />
+    <ClCompile Include="MediumRock.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerCheck.cpp" />
+    <ClCompile Include="PlayerShot.cpp" />
+    <ClCompile Include="Rock.cpp" />
+    <ClCompile Include="RockController.cpp" />
+    <ClCompile Include="Explosion.cpp" />
+    <ClCompile Include="Shot.cpp" />
+    <ClCompile Include="SmallRock.cpp" />
+    <ClCompile Include="SmallUFO.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="UFO.cpp" />
+    <ClCompile Include="UFOController.cpp" />
+    <ClCompile Include="UFOShot.cpp" />
+    <ClCompile Include="VectorAsteroids.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
