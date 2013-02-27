@@ -2,11 +2,9 @@
     CONSOLE APPLICATION : VectorAsteroids Project Overview
 ========================================================================
 
-AppWizard has created this VectorAsteroids application for you.
-
-This file contains a summary of what you will find in each of the files that
-make up your VectorAsteroids application.
-
+A clone of the original Atari Asteroids. This was a learning experience for me, for learning C++ and making games with it.
+ I started learning C++ about a month ago, and this is how far I've gotten today.
+ I hope someone learns from my work, and that it helps someone. Thank you for your time.
 
 VectorAsteroids.vcxproj
     This is the main project file for VC++ projects generated using an Application Wizard.
