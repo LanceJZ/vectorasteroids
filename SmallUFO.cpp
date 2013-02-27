@@ -18,7 +18,7 @@ void SmallUFO::SetPlayerLocation(float X, float Y)
 	m_PlayerY = Y;
 }
 
-SmallUFO::SmallUFO(Player &player) : UFO(player)
+SmallUFO::SmallUFO(Player &player, boost::random::mt19937 &gen) : UFO(player, gen)
 {
 	m_Width = 20;
 	m_Radius = 10;
@@ -42,8 +42,8 @@ void SmallUFO::DoesUFOShot(void)
 	{
 		ResetShotTimer(0);
 
-		if (rand() % 20 < 15)
-			FireShot((rand() % 600) * 0.01);
+		if (Random(0, 100) < 80)
+			FireShot(Random(0, 600) * 0.01);
 		else
 			AimAtPlayer();
 	}

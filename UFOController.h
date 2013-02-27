@@ -3,11 +3,14 @@
 #include "LargeUFO.h"
 #include "SmallUFO.h"
 #include "Player.h"
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/uniform_int_distribution.hpp>
 
 class UFOController : public Controllers
 {
 private:
 	Player &m_PlayerReference;
+	boost::random::mt19937 &m_RandGenerator;
 
 	ALLEGRO_SAMPLE *m_SmallEngineSound;
 	ALLEGRO_SAMPLE *m_LargeEngineSound;
@@ -27,9 +30,10 @@ private:
 	void SpawnSmallUFO(void);
 	void DoesUFOSpawn(void);
 	void PassPlayerLocation(void);
+	int Random(int Min, int Max);
 
 public:
-	UFOController(Player &player);
+	UFOController(Player &player, boost::random::mt19937 &gen);
 	~UFOController(void);
 
 	void Update(float Frame);

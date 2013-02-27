@@ -3,6 +3,8 @@
 #include "entity.h"
 #include "UFOShot.h"
 #include "Explosion.h"
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/uniform_int_distribution.hpp>
 
 class UFO :
 	public Entity
@@ -42,6 +44,7 @@ private:
 
 protected:
 	Player (&m_PlayerReference);
+	boost::random::mt19937 &m_RandGenerator;
 
 	float m_TimerAmountChangeVector;
 	float m_TimerAmountFireShot;
@@ -55,9 +58,10 @@ protected:
 	void DoesUFOCollidePlayer(void);
 	void DoesPlayerShotUFO(void);
 	void virtual PlayerShotUFO(void);
+	int Random(int Min, int Max);
 
 public:
-	UFO(Player &player);
+	UFO(Player &player, boost::random::mt19937 &gen);
 	~UFO(void);
 
 	void virtual Update(float Frame);

@@ -167,18 +167,25 @@ void UFOController::ResetTimer(void)
 		al_stop_sample_instance(m_SmallEngineInstance);
 }
 
-UFOController::UFOController(Player &player) : m_PlayerReference(player)
+UFOController::UFOController(Player &player, boost::random::mt19937 &gen) : m_PlayerReference(player), m_RandGenerator(gen)
 {
 	m_TimerSpawn = 0;
 	m_TimerSpawnAmount = 10.5;
 	m_SpawnCounter = 0;
 	m_UFOActive = false;
-	m_LUFO = new LargeUFO(player);
-	m_SUFO = new SmallUFO(player);
+	m_LUFO = new LargeUFO(player, gen);
+	m_SUFO = new SmallUFO(player, gen);
 }
 
 UFOController::~UFOController(void)
 {
+}
+
+//Private methods. ---------------------------------------------------
+int UFOController::Random(int Min, int Max)
+{
+	boost::random::uniform_int_distribution<> roll(Min, Max);
+	return roll(m_RandGenerator);
 }
 
 void UFOController::SpawnLargeUFO(void)
@@ -217,7 +224,9 @@ void UFOController::DoesUFOSpawn(void)
 	{
 		float spawnPercent = pow(.915, m_SpawnCounter);
 
-		if (rand() % 100 < spawnPercent * 100)
+		// After each UFO is spawned the chance it is a small UFO increases.
+		// The first spawn it is 0% chance, it goes down after each one.
+		if (Random(0, 100) < spawnPercent * 100)
 		{
 			SpawnLargeUFO();
 		}

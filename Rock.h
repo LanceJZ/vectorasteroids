@@ -3,6 +3,8 @@
 #include "Player.h"
 #include "UFOController.h"
 #include "Explosion.h"
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/uniform_int_distribution.hpp>
 
 class Rock :
 	public Entity
@@ -19,10 +21,12 @@ private:
 	void DoesPlayerShipCollide(void);
 	void DoesUFOShipCollide(void);
 	void Distroyed(void);
+	int Random(int Min, int Max);
 
 protected:
 	UFOController (&m_UFOsReference);
 	Player (&m_PlayerReference);
+	boost::random::mt19937 &m_RandGenerator;
 
 	bool m_Distroyed;
 	int m_MaxVelocity;
@@ -35,7 +39,7 @@ protected:
 	int m_RockVarienceLow;
 
 public:
-	Rock(Player &player, UFOController &UFOs);
+	Rock(Player &player, UFOController &UFOs, boost::random::mt19937 &gen);
 	~Rock(void);
 
 	virtual void PlayerShotRock(void);

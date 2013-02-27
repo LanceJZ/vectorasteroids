@@ -3,9 +3,7 @@
 
 bool Entity::CirclesIntersect(float TargetX, float TargetY, float TargetRadius)
 {
-	float distanceX = TargetX - m_X;
-	float distanceY = TargetY - m_Y;
-	float distance = sqrt(distanceX * distanceX + distanceY * distanceY);
+	float distance = sqrt((TargetX - m_X) * (TargetX - m_X) + (TargetY - m_Y) * (TargetY - m_Y));
 
 	if (distance < m_Radius + TargetRadius)
 	{

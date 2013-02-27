@@ -17,11 +17,11 @@ void LargeUFO::DoesUFOShot(void)
 	{
 		ResetShotTimer(0);
 
-		FireShot((rand() % 600) * 0.01);
+		FireShot(Random(0, 600) * 0.01);
 	}
 }
 
-LargeUFO::LargeUFO(Player &player) : UFO(player)
+LargeUFO::LargeUFO(Player &player, boost::random::mt19937 &gen) : UFO(player, gen)
 {
 	m_Width = 40;
 	m_Radius = 22;

@@ -17,7 +17,7 @@ protected:
 	void DoesPlayerShotUFO(void);
 
 public:
-	SmallUFO(Player &player);
+	SmallUFO(Player &player, boost::random::mt19937 &gen);
 	~SmallUFO(void);
 
 	void Update(float Frame);

@@ -29,7 +29,7 @@ void HUD::Draw(void)
 				"ALT  key  for   hyperspace");
 		}
 		else
-			hits = "Hits  " + IntToString(m_PlayerHitsLeft);
+			hits = "Ships  " + IntToString(m_PlayerHitsLeft);
 
 		memcpy(scorech, score.c_str(), 20);
 		memcpy(hiscorech, hiscore.c_str(), 22);

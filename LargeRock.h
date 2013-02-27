@@ -7,7 +7,7 @@ class LargeRock :
 	public Rock
 {
 public:
-	LargeRock(Player &player, UFOController &UFOs);
+	LargeRock(Player &player, UFOController &UFOs, boost::random::mt19937 &gen);
 	~LargeRock(void);
 
 	void PlayerShotRock(void);

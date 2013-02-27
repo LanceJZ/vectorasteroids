@@ -7,7 +7,7 @@ class MediumRock :
 	public Rock
 {
 public:
-	MediumRock(Player &player, UFOController &UFOs);
+	MediumRock(Player &player, UFOController &UFOs, boost::random::mt19937 &gen);
 	~MediumRock(void);
 
 	void PlayerShotRock(void);

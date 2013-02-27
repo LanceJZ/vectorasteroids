@@ -7,7 +7,7 @@ class SmallRock :
 	public Rock
 {
 public:
-	SmallRock(Player &player, UFOController &UFOs);
+	SmallRock(Player &player, UFOController &UFOs, boost::random::mt19937 &gen);
 	~SmallRock(void);
 
 	void PlayerShotRock(void);

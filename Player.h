@@ -2,6 +2,8 @@
 #include "Entity.h"
 #include "PlayerShot.h"
 #include "HUD.h"
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/uniform_int_distribution.hpp>
 
 class Player :
 	public Entity
@@ -66,6 +68,7 @@ private:
 
 	PlayerShot *m_Shots[4];
 	HUD m_HUD;
+	boost::random::mt19937 &m_RandGenerator;
 
 	void UpdateShip(void);
 	void DoRotationThrust(void);
@@ -77,9 +80,10 @@ private:
 	void UpdateExplosion(void);
 	void DrawExplosion(void);
 	void SetExplosion(void);
+	int Random(int Min, int Max);
 
 public:
-	Player(void);
+	Player(boost::random::mt19937 &gen);
 	~Player(void);
 
 	void SetFont(ALLEGRO_FONT &Font);
@@ -87,6 +91,8 @@ public:
 	void Update(float frame);
 	void NewGame(void);
 	void PlayerHit(void);
+	void FireButtonPressed(void);
+	void HyperSpaceButtonPressed(void);
 	void SetLocation(int X, int Y);
 	void SetLocationX(int X);
 	void SetLocationY(int Y);
@@ -97,10 +103,8 @@ public:
 	void SetRotation(float Rotation);
 	void SetScreenSize(int Height, int Width);
 	void SetThrust(bool Thrust);
-	void SetFire(bool Fire);
 	void SetTurnRight(bool TurnRight);
 	void SetTurnLeft(bool TurnLeft);
-	void SetHyperSpace(bool Hyper);
 	void SetShotActive(int Shot, bool Active);
 	void SetGotPoints(int AddToScore);
 	void SetNewWaveNumber(int Wave);

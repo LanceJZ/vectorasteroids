@@ -7,12 +7,15 @@
 #include "MediumRock.h"
 #include "SmallRock.h"
 #include "PlayerCheck.h"
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/uniform_int_distribution.hpp>
 
 class RockController : public Controllers
 {
 private:
 	Player (&m_PlayerReference);
 	UFOController (&m_UFOsReference);
+	boost::random::mt19937 &m_RandGenerator;
 
 	ALLEGRO_SAMPLE *m_ExplodeSound;
 
@@ -32,7 +35,7 @@ private:
 	void ClearAllRocks(void);
 
 public:
-	RockController(Player &player, UFOController &UFOs);
+	RockController(Player &player, UFOController &UFOs, boost::random::mt19937 &gen);
 	RockController(void);
 	~RockController(void);
 

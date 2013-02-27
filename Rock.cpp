@@ -70,12 +70,12 @@ void Rock::PlayerShotRock(void)
 
 void Rock::Activate(int X, int Y)
 {
-	float angle = (rand() % 600) * 0.01;
+	float angle = Random(0, 600) * 0.01;
 
 	float sinRot = sin(angle);
 	float cosRot = cos(angle);
 
-	int speed = (rand() % m_MaxVelocity) + (m_MaxVelocity / 4);
+	int speed = Random(m_MaxVelocity/4 ,m_MaxVelocity);
 
 	m_VelocityX = cosRot * speed;
 	m_VelocityY = sinRot * speed;
@@ -87,7 +87,8 @@ void Rock::Activate(int X, int Y)
 	BuildRock();
 }
 
-Rock::Rock(Player &player, UFOController &UFOs) : m_PlayerReference(player), m_UFOsReference(UFOs)
+Rock::Rock(Player &player, UFOController &UFOs, boost::random::mt19937 &gen) :
+	m_PlayerReference(player), m_UFOsReference(UFOs), m_RandGenerator(gen)
 {
 	m_Active = false;
 	m_Distroyed = false;
@@ -98,6 +99,12 @@ Rock::~Rock(void)
 }
 
 //Private methods ----------------------------------------------------------------
+int Rock::Random(int Min, int Max)
+{
+	boost::random::uniform_int_distribution<> roll(Min, Max);
+	return roll(m_RandGenerator);
+}
+
 void Rock::DoesPlayerShotCollide()
 {
 	for (int shot = 0; shot < m_PlayerReference.GetNumberOfShots(); shot++)
@@ -180,41 +187,41 @@ void Rock::DoesUFOShipCollide(void)
 
 void Rock::BuildRock(void)
 {
-	m_RockPoints[0].X = m_RockLow + ((rand() % m_RockVarienceLow) - (m_RockVarienceLow / 2));
-	m_RockPoints[0].Y = -m_RockMed - ((rand() % m_RockVarienceMed) - (m_RockVarienceMed / 2));
+	m_RockPoints[0].X = m_RockLow + Random(0, m_RockVarienceLow);
+	m_RockPoints[0].Y = -m_RockMed - Random(0, m_RockVarienceMed);
 
-	m_RockPoints[1].X = m_RockMed + ((rand() % m_RockVarienceMed) - (m_RockVarienceMed / 2));
-	m_RockPoints[1].Y = -m_RockHigh - ((rand() % m_RockVarienceHigh) - (m_RockVarienceHigh / 2));
+	m_RockPoints[1].X = m_RockMed + Random(0, m_RockVarienceMed);
+	m_RockPoints[1].Y = -m_RockHigh - Random(0, m_RockVarienceHigh);
 
-	m_RockPoints[2].X = m_RockHigh + ((rand() % m_RockVarienceHigh) - (m_RockVarienceHigh / 2));
-	m_RockPoints[2].Y = -m_RockMed - ((rand() % m_RockVarienceMed) - (m_RockVarienceMed / 2));
+	m_RockPoints[2].X = m_RockHigh + Random(0, m_RockVarienceHigh);
+	m_RockPoints[2].Y = -m_RockMed - Random(0, m_RockVarienceMed);
 
-	m_RockPoints[3].X = m_RockMed + ((rand() % m_RockVarienceMed) - (m_RockVarienceMed / 2));
-	m_RockPoints[3].Y = m_RockLow + ((rand() % m_RockVarienceLow) - (m_RockVarienceLow / 2));
+	m_RockPoints[3].X = m_RockMed + Random(0, m_RockVarienceMed);
+	m_RockPoints[3].Y = m_RockLow + Random(0, m_RockVarienceLow);
 
-	m_RockPoints[4].X = m_RockHigh + ((rand() % m_RockVarienceHigh) - (m_RockVarienceHigh / 2));
-	m_RockPoints[4].Y = m_RockMed + ((rand() % m_RockVarienceMed) - (m_RockVarienceMed / 2));
+	m_RockPoints[4].X = m_RockHigh + Random(0, m_RockVarienceHigh);
+	m_RockPoints[4].Y = m_RockMed + Random(0, m_RockVarienceMed);
 
-	m_RockPoints[5].X = m_RockMed + ((rand() % m_RockVarienceMed) - (m_RockVarienceMed / 2));
-	m_RockPoints[5].Y = m_RockHigh + ((rand() % m_RockVarienceHigh) - (m_RockVarienceHigh / 2));
+	m_RockPoints[5].X = m_RockMed + Random(0, m_RockVarienceMed);
+	m_RockPoints[5].Y = m_RockHigh + Random(0, m_RockVarienceHigh);
 
-	m_RockPoints[6].X = m_RockLow + ((rand() % m_RockVarienceLow) - (m_RockVarienceLow / 2));
-	m_RockPoints[6].Y = m_RockMed + ((rand() % m_RockVarienceMed) - (m_RockVarienceMed / 2));
+	m_RockPoints[6].X = m_RockLow + Random(0, m_RockVarienceLow);
+	m_RockPoints[6].Y = m_RockMed + Random(0, m_RockVarienceMed);
 
-	m_RockPoints[7].X = -m_RockMed - ((rand() % m_RockVarienceMed) - (m_RockVarienceMed / 2));
-	m_RockPoints[7].Y = m_RockHigh + ((rand() % m_RockVarienceHigh) - (m_RockVarienceHigh / 2));
+	m_RockPoints[7].X = -m_RockMed - Random(0, m_RockVarienceMed);
+	m_RockPoints[7].Y = m_RockHigh + Random(0, m_RockVarienceHigh);
 
-	m_RockPoints[8].X = -m_RockHigh - ((rand() % m_RockVarienceHigh) - (m_RockVarienceHigh / 2));
-	m_RockPoints[8].Y = m_RockMed + ((rand() % m_RockVarienceMed) - (m_RockVarienceMed / 2));
+	m_RockPoints[8].X = -m_RockHigh - Random(0, m_RockVarienceHigh);
+	m_RockPoints[8].Y = m_RockMed + Random(0, m_RockVarienceHigh);
 
-	m_RockPoints[9].X = -m_RockMed - ((rand() % m_RockVarienceMed) - (m_RockVarienceMed / 2));
-	m_RockPoints[9].Y = m_RockLow + ((rand() % m_RockVarienceLow) - (m_RockVarienceLow / 2));
+	m_RockPoints[9].X = -m_RockMed - Random(0, m_RockVarienceMed);
+	m_RockPoints[9].Y = m_RockLow + Random(0, m_RockVarienceLow);
 
-	m_RockPoints[10].X = -m_RockHigh - ((rand() % m_RockVarienceHigh) - (m_RockVarienceHigh / 2));
-	m_RockPoints[10].Y = -m_RockMed - ((rand() % m_RockVarienceMed) - (m_RockVarienceMed / 2));
+	m_RockPoints[10].X = -m_RockHigh - Random(0, m_RockVarienceHigh);
+	m_RockPoints[10].Y = -m_RockMed - Random(0, m_RockVarienceMed);
 
-	m_RockPoints[11].X = -m_RockMed - ((rand() % m_RockVarienceMed) - (m_RockVarienceMed / 2));
-	m_RockPoints[11].Y = -m_RockHigh - ((rand() % m_RockVarienceHigh) - (m_RockVarienceHigh / 2));
+	m_RockPoints[11].X = -m_RockMed - Random(0, m_RockVarienceMed);
+	m_RockPoints[11].Y = -m_RockHigh - Random(0, m_RockVarienceHigh);
 }
 
 void Rock::DrawRock(void)

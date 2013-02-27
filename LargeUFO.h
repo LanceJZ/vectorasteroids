@@ -13,7 +13,7 @@ protected:
 	void PlayerShotUFO(void);
 
 public:
-	LargeUFO(Player &player);
+	LargeUFO(Player &player, boost::random::mt19937 &gen);
 	~LargeUFO(void);
 
 	void Update(float Frame);	

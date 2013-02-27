@@ -6,7 +6,7 @@ void LargeRock::PlayerShotRock()
 	m_PlayerReference.SetGotPoints(20);
 }
 
-LargeRock::LargeRock(Player &player, UFOController &UFOs) : Rock(player, UFOs)
+LargeRock::LargeRock(Player &player, UFOController &UFOs, boost::random::mt19937 &gen) : Rock(player, UFOs, gen)
 {
 	m_MaxVelocity = 35;
 	m_RockLow = 0;

@@ -44,7 +44,7 @@ void UFO::Activate(int Y)
 
 	BuildUFO();
 
-	if ((rand() % 20) < 10)
+	if (Random(0, 100) < 50)
 	{
 		m_FromLeft = true;
 		m_FromRight = false;
@@ -166,7 +166,7 @@ void UFO::GotDistroyed(void)
 	Deactivate();
 }
 
-UFO::UFO(Player &player) : m_PlayerReference(player)
+UFO::UFO(Player &player, boost::random::mt19937 &gen) : m_PlayerReference(player), m_RandGenerator(gen)
 {
 	m_NumberOfShots = 2;
 
@@ -209,6 +209,12 @@ UFO::~UFO(void)
 }
 
 //Protected methods. -----------------------------------
+int UFO::Random(int Min, int Max)
+{
+	boost::random::uniform_int_distribution<> roll(Min, Max);
+	return roll(m_RandGenerator);
+}
+
 void UFO::FireShot(float angle)
 {
 	if (m_ShotSound)
@@ -226,7 +232,7 @@ void UFO::FireShot(float angle)
 
 void UFO::ResetShotTimer(float TimerAmount)
 {
-	m_TimerFireShot = m_TimerAmountFireShot + al_get_time() + ((rand() % (int)(m_TimerAmountFireShot * 10) * 0.1));
+	m_TimerFireShot = m_TimerAmountFireShot + al_get_time() + Random(0, (int)(m_TimerAmountFireShot * 10) * 0.1);
 }
 
 //Private methods. -----------------------------------
@@ -242,12 +248,12 @@ void UFO::ChangeVector(void)
 
 	if (m_FromLeft)
 	{
-		angle = 5 + ((rand() % 200) *0.01);
+		angle = 5 + (Random(0, 200) *0.01);
 	}
 
 	if (m_FromRight)
 	{
-		angle = 2 + ((rand() % 200) *0.01);
+		angle = 2 + (Random(0, 200) *0.01);
 	}
 
 	float sinRot = sin(angle);
@@ -256,7 +262,7 @@ void UFO::ChangeVector(void)
 	m_VelocityX = cosRot * m_MaxVelocity;
 	m_VelocityY = sinRot * m_MaxVelocity;
 
-	m_TimerChangeVector = m_TimerAmountChangeVector + al_get_time() + (rand() % (int)(m_TimerAmountChangeVector * 0.75));
+	m_TimerChangeVector = m_TimerAmountChangeVector + al_get_time() + Random(0, (int)(m_TimerAmountChangeVector * 0.75));
 }
 
 void UFO::CheckForSide(void)

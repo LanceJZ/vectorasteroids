@@ -30,16 +30,28 @@ void Player::Update(float Frame)
 		CheckForEdge();
 		UpdateShip();
 		UpdateFrame();
-
-		if (m_Fire)
-		{
-			FireShot();
-		}
 	}
 	else if (m_ExplosionOn)
 		UpdateExplosion();
 
 	UpdateShots();
+}
+
+void Player::FireButtonPressed(void)
+{
+	if (m_Active && !m_Hit)
+	{
+		FireShot();
+	}
+}
+
+void Player::HyperSpaceButtonPressed(void)
+{
+	if (m_Active && !m_Hit)
+	{
+		m_X = Random(0, m_ScreenWidth);
+		m_Y = Random(0, m_ScreenHeight);
+	}
 }
 
 void Player::SetFont(ALLEGRO_FONT &Font)
@@ -164,11 +176,6 @@ void Player::SetThrust(bool Thrust)
 	m_Thrust = Thrust;
 }
 
-void Player::SetFire(bool Fire)
-{
-	m_Fire = Fire;
-}
-
 void Player::SetTurnRight(bool TurnRight)
 {
 	m_TurnRight = TurnRight;
@@ -177,15 +184,6 @@ void Player::SetTurnRight(bool TurnRight)
 void Player::SetTurnLeft(bool TurnLeft)
 {
 	m_TurnLeft = TurnLeft;
-}
-
-void Player::SetHyperSpace(bool Hyper)
-{
-	if (Hyper)
-	{
-		m_X = (rand() % m_ScreenWidth);
-		m_Y = (rand() % m_ScreenHeight);
-	}
 }
 
 void Player::SetRotation(float Rotation)
@@ -250,7 +248,7 @@ void Player::SetSounds(ALLEGRO_SAMPLE *ShotSound, ALLEGRO_SAMPLE *ThrustSound, A
 	al_attach_sample_instance_to_mixer(m_ThrustInstance, al_get_default_mixer());
 }
 
-Player::Player(void)
+Player::Player(boost::random::mt19937 &gen) : m_RandGenerator(gen)
 {
 	m_Thrust = false;
 	m_Fire = false;
@@ -292,7 +290,13 @@ Player::~Player(void)
 
 }
 
-//Private methods
+//Private methods ----------------------------------------
+int Player::Random(int Min, int Max)
+{
+	boost::random::uniform_int_distribution<> roll(Min, Max);
+	return roll(m_RandGenerator);
+}
+
 void Player::FireShot(void)
 {
 	int activateshot = 0;
@@ -513,14 +517,14 @@ void Player::SetExplosion(void)
 	m_ExRInsideX = m_RInSideX;
 	m_ExRInsideY = m_RInSideY;
 
-	m_ExMoveAX = ((rand() % 60) * 0.1) - ((rand() % 60) * 0.1);
-	m_ExMoveAY = ((rand() % 60) * 0.1) - ((rand() % 60) * 0.1);
-	m_ExMoveBX = ((rand() % 60) * 0.1) - ((rand() % 60) * 0.1);
-	m_ExMoveBY = ((rand() % 60) * 0.1) - ((rand() % 60) * 0.1);
-	m_ExMoveCX = ((rand() % 60) * 0.1) - ((rand() % 60) * 0.1);
-	m_ExMoveCY = ((rand() % 60) * 0.1) - ((rand() % 60) * 0.1);
+	m_ExMoveAX = (Random(0, 60) * 0.1) - (Random(0, 60) * 0.1);
+	m_ExMoveAY = (Random(0, 60) * 0.1) - (Random(0, 60) * 0.1);
+	m_ExMoveBX = (Random(0, 60) * 0.1) - (Random(0, 60) * 0.1);
+	m_ExMoveBY = (Random(0, 60) * 0.1) - (Random(0, 60) * 0.1);
+	m_ExMoveCX = (Random(0, 60) * 0.1) - (Random(0, 60) * 0.1);
+	m_ExMoveCY = (Random(0, 60) * 0.1) - (Random(0, 60) * 0.1);
 
-	m_ExplosionTimer = al_get_time() + m_ExplosiontTimerAmount + (rand() % (int)m_ExplosiontTimerAmount);
+	m_ExplosionTimer = al_get_time() + m_ExplosiontTimerAmount + Random(0, (int)m_ExplosiontTimerAmount);
 }
 
 void Player::UpdateExplosion(void)

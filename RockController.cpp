@@ -84,7 +84,7 @@ void RockController::SpawnNewWave(int NumberOfRocks)
 
 		if (spawnnewrock)
 		{
-			m_LargeRocks.push_back(new LargeRock(m_PlayerReference, m_UFOsReference));
+			m_LargeRocks.push_back(new LargeRock(m_PlayerReference, m_UFOsReference, m_RandGenerator));
 			m_LargeRocks[m_LargeRocks.size() - 1]->SetScreenSize(m_ScreenWidth, m_ScreenHeight);
 			m_LargeRocks[m_LargeRocks.size() - 1]->Activate(GetRandomX(), GetRandomY());			
 		}
@@ -109,7 +109,7 @@ void RockController::SpawnMedRocks(int X, int Y)
 
 		if (spawnnewrock)
 		{
-			m_MedRocks.push_back(new MediumRock(m_PlayerReference, m_UFOsReference));
+			m_MedRocks.push_back(new MediumRock(m_PlayerReference, m_UFOsReference, m_RandGenerator));
 			m_MedRocks[m_MedRocks.size() - 1]->SetScreenSize(m_ScreenWidth, m_ScreenHeight);
 			m_MedRocks[m_MedRocks.size() - 1]->Activate(X, Y);
 		}
@@ -134,7 +134,7 @@ void RockController::SpawnSmallRocks(int X, int Y)
 
 		if (spawnnewrock)
 		{
-			m_SmallRocks.push_back(new SmallRock(m_PlayerReference, m_UFOsReference));
+			m_SmallRocks.push_back(new SmallRock(m_PlayerReference, m_UFOsReference, m_RandGenerator));
 			m_SmallRocks[m_SmallRocks.size() - 1]->SetScreenSize(m_ScreenWidth, m_ScreenHeight);
 			m_SmallRocks[m_SmallRocks.size() - 1]->Activate(X, Y);
 		}
@@ -172,7 +172,8 @@ void RockController::NewGame(void)
 	SpawnNewWave(m_NumberOfRocks);
 }
 
-RockController::RockController(Player &player, UFOController &UFOs) : m_PlayerReference(player), m_UFOsReference(UFOs)
+RockController::RockController(Player &player, UFOController &UFOs, boost::random::mt19937 &gen) :
+	m_PlayerReference(player), m_UFOsReference(UFOs), m_RandGenerator(gen)
 {
 	CreateRocks();
 	ClearAllRocks();
@@ -190,17 +191,17 @@ void RockController::CreateRocks(void)
 {
 	for (int rock = 0; rock < 8; rock++)
 	{		
-		m_LargeRocks.push_back(new LargeRock(m_PlayerReference, m_UFOsReference));
+		m_LargeRocks.push_back(new LargeRock(m_PlayerReference, m_UFOsReference, m_RandGenerator));
 	}
 
 	for (int rock = 0; rock < 16; rock++)
 	{		
-		m_MedRocks.push_back(new MediumRock(m_PlayerReference, m_UFOsReference));
+		m_MedRocks.push_back(new MediumRock(m_PlayerReference, m_UFOsReference, m_RandGenerator));
 	}
 
 	for (int rock = 0; rock < 32; rock++)
 	{		
-		m_SmallRocks.push_back(new SmallRock(m_PlayerReference, m_UFOsReference));
+		m_SmallRocks.push_back(new SmallRock(m_PlayerReference, m_UFOsReference, m_RandGenerator));
 	}
 }
 
